@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#211d19" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Cielo Fantasy Fight - jogo de luta 2D com versus local, salas online e campeonatos." />
+  <title>Cielo Fantasy Fight</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main id="game-shell" aria-label="Cielo Fantasy Fight">
+    <canvas id="game" width="1280" height="720" tabindex="0" aria-label="Jogo de luta Cielo Fantasy Fight"></canvas>
+    <button id="mobile-fullscreen" type="button" aria-label="Abrir jogo em tela cheia">⛶ TELA CHEIA</button>
+    <p class="fallback">Se o jogo não iniciar, execute <code>npm run dev</code> e abra o endereço exibido no terminal.</p>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+export const GAME_WIDTH = 1280;
+export const GAME_HEIGHT = 720;
+export const FLOOR_Y = 598;
+export const STAGE_LEFT = 110;
+export const STAGE_RIGHT = 1590;
+export const STAGE_WIDTH = STAGE_RIGHT - STAGE_LEFT;
+export const FIXED_FPS = 60;
+export const COMBO_WINDOW_MS = 700;
+export const INPUT_BUFFER_MS = 150;
+export const PLAYER_GAP = 92;
+export const CAMERA_MIN_ZOOM = 0.88;
+export const CAMERA_MAX_ZOOM = 1.0;

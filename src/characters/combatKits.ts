@@ -1,0 +1,16 @@
+import type { FighterAppearance, SkinDefinition, SpecialMoveDefinition, SpecialKey } from '../types/game.js';
+const move=(key:SpecialKey,label:string,damage:number,startup:number,recovery:number,hitStun:number,knockbackX:number,knockbackY:number,shake:number,extra:Partial<SpecialMoveDefinition>):SpecialMoveDefinition=>({key,label,damage,chipDamage:key==='super'?4:1,startup,active:key==='special1'?80:110,recovery,hitStun,blockStun:key==='super'?190:135,hitStop:key==='super'?115:72,knockback:{x:knockbackX,y:knockbackY},blockKnockback:key==='super'?100:62,hitbox:{offsetX:58,offsetY:-124,width:key==='super'?184:142,height:key==='super'?92:72},cancelAt:9999,cancelInto:[],shake,command:key==='special1'?'qcf-light':key==='special2'?'dp-heavy':'double-qcf-heavy',meterCost:key==='super'?100:0,...extra});
+const projectile=(color:string,speed:number,width:number,height:number)=>({speed,lifetimeMs:1500,width,height,color,spawnAtMs:105});
+export const specialKits:Record<string,Record<SpecialKey,SpecialMoveDefinition>>={
+  mateo:{special1:move('special1','Rajada do Sino',9,120,210,205,145,20,4,{projectile:projectile('#e9ba68',560,46,24)}),special2:move('special2','Joelho Ascendente',12,100,260,245,180,330,6,{}),super:move('super','Último Round',30,155,390,390,390,380,10,{})},
+  darius:{special1:move('special1','Onda de Impacto',11,175,280,235,180,10,5,{projectile:{...projectile('#d36b55',430,64,20),spawnAtMs:150}}),special2:move('special2','Uppercut Titânico',15,145,320,300,230,390,8,{}),super:move('super','Quebra-Arena',34,210,460,430,460,430,12,{})},
+  nox:{special1:move('special1','Lâmina Sombria',8,95,175,185,130,15,4,{projectile:projectile('#a584dc',650,52,28)}),special2:move('special2','Ascensão Noturna',11,85,225,225,170,315,6,{}),super:move('super','Eclipse Rush',28,125,350,360,420,350,10,{})},
+  aldric:{special1:move('special1','Corte de Energia',10,145,235,225,165,20,5,{projectile:projectile('#83c7b0',590,76,30)}),special2:move('special2','Guarda Celeste',13,115,275,270,205,355,7,{}),super:move('super','Julgamento Real',32,175,420,410,440,400,11,{})},
+};
+const skin=(id:string,name:string,filter:string,appearance:Partial<FighterAppearance>):SkinDefinition=>({id,name,filter,appearance});
+export const fighterSkins:Record<string,SkinDefinition[]>={
+  mateo:[skin('default','Original','',{}),skin('aurora','Aurora','hue-rotate(32deg) saturate(1.15)',{primary:'#efe1ac',accent:'#c47b3d'}),skin('obsidian','Obsidiana','grayscale(.65) brightness(.68) contrast(1.2)',{primary:'#4b4b50',accent:'#d0a96b'})],
+  darius:[skin('default','Original','',{}),skin('gold','Dourado','sepia(.55) saturate(1.35)',{primary:'#9d7130',accent:'#f0d08a'}),skin('cobalt','Cobalto','hue-rotate(155deg) saturate(1.2)',{primary:'#315889',accent:'#96b9df'})],
+  nox:[skin('default','Original','',{}),skin('crimson','Carmesim','hue-rotate(300deg) saturate(1.45)',{primary:'#702f36',accent:'#e08b67'}),skin('spectral','Espectral','hue-rotate(92deg) saturate(.8) brightness(1.2)',{primary:'#608b7e',accent:'#bcebdc'})],
+  aldric:[skin('default','Original','',{}),skin('emerald','Esmeralda','hue-rotate(58deg) saturate(1.18)',{secondary:'#315e4b',accent:'#82bd87'}),skin('royal','Real','hue-rotate(195deg) saturate(1.25)',{secondary:'#513b78',accent:'#d5b06d'})],
+};
