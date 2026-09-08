@@ -24,5 +24,6 @@ Copyright Microsoft Corporation. Licensed under Apache License 2.0.
 - Hero Knight — LuizMelo — CC0 1.0.
 - Wizard Pack — LuizMelo — CC0 1.0.
 - Spirit Boxer / Sci-fi Character Pack 1 — Penusbmic — commercial use and modification permitted; attribution optional; individual asset resale prohibited.
+- Marcelo Fighter — pacote fornecido por MarceloMatheus especificamente para uso neste projeto; arquivos e caracterização documentados em `ASSETS.md`.
 
 Original storefront URLs, pinned mirrors and modifications are listed in `ASSETS.md`.

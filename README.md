@@ -6,21 +6,21 @@
 
 ## O que entrou na v3
 
-- **4 lutadores jogáveis** com configurações próprias, três skins cada e perfis visuais distintos.
+- **5 lutadores jogáveis** com configurações próprias, três skins cada e perfis visuais distintos.
 - **Character Select** para dois jogadores.
 - Personagens visualmente maiores, com câmera/escala sem alterar as caixas físicas por acidente.
 - Alternância corporal determinística em sequências — por exemplo `Light -> Light -> Heavy` troca a variante do membro em vez de repetir de forma artificial.
 - Balanceamento anti-infinite: damage scaling, hit-stun decay, pushback crescente, recuperação defensiva em combos longos e hard combo limit.
 - Especiais por comandos clássicos, projéteis, super meter e finalizações arcade não gráficas.
 - SFX em camadas para golpes, especiais, projéteis, super e finalização, com variações para evitar repetição.
-- Controle virtual touch para lutas online mobile e navegação por toque nos menus.
+- Controle virtual touch para lutas locais e online mobile, com navegação por toque nos menus.
 - Cues de música original/procedural para menu, character select, luta, vitória e tournament.
 - **Local Fight** preservado para dois jogadores no mesmo teclado.
 - **Online Fight 1v1** via WebSocket e códigos privados.
 - Lobby com nome, fighter, READY, host, conexão e ping.
 - Reconnect, timeout/forfeit e host migration.
 - **Tournament Room** single elimination para até 4 ou 8 jogadores, bracket e campeão.
-- Settings persistidos: master/music/SFX, screen shake, fullscreen, render scale, controles e touch online.
+- Settings persistidos: master/music/SFX, screen shake, fullscreen, render scale, controles e touch.
 - Testes de combate, all-vs-all do roster e smoke tests de rede com sockets reais.
 
 ## Tecnologias
@@ -85,7 +85,7 @@ A suíte valida, entre outros pontos:
 - hit stop/hit stun/knockback;
 - cancel e combo;
 - rounds/pause/restart;
-- 4 lutadores únicos com três skins e kits especiais completos;
+- 5 lutadores únicos com três skins e kits especiais completos;
 - todos contra todos para alcance base;
 - alternância determinística dos golpes;
 - damage scaling/hit-stun decay/pushback/hard combo end;
@@ -149,7 +149,7 @@ No online, cada computador controla somente o próprio personagem usando o conju
 
 Os movimentos direcionais possuem uma janela tolerante de 900 ms, adequada para teclado e controles touch.
 
-Em celulares, partidas online exibem um direcional touch de oito direções e botões de ataque/defesa. Menus, lobby, READY, skins e campos de sala aceitam toque e teclado virtual. O modo local mobile continua exigindo teclado/outro dispositivo, pois o controle virtual é destinado ao lutador online local.
+Em celulares, partidas locais e online exibem um direcional touch de oito direções e botões de ataque/defesa. Menus, lobby, READY, skins e campos de sala aceitam toque e teclado virtual.
 
 ## Roster
 
@@ -159,6 +159,7 @@ Em celulares, partidas online exibem um direcional touch de oito direções e bo
 | Darius | Heavy/pressure | Mais peso e presença curta. |
 | Nox | Rushdown | Avanço agressivo com leitura direta. |
 | Aldric | Range | Alcance maior e neutral mais disciplinado. |
+| Marcelo | Technical | Striker urbano preciso com energia dourada. |
 
 A configuração fica em `src/characters/roster.ts`, enquanto os sprites ficam em `src/characters/spriteProfiles.ts`. O `CombatSystem` não contém condicionais específicas por personagem.
 

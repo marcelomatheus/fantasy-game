@@ -10,6 +10,7 @@ Este manifesto documenta a origem e a licença dos assets visuais usados pelo ro
 | Darius | Martial Hero 3 | LuizMelo | https://luizmelo.itch.io/martial-hero-3 | CC0 1.0 | `tomas-trls/javascript-game-challenge` em commit imutável | Clips de 126px mapeados para idle/run/jump/hit/death; Attack1/2/3 reutilizados no kit de boxe; tint, escala e anchor calibrados. |
 | Nox | Hero Knight | LuizMelo | https://luizmelo.itch.io/hero-knight | CC0 1.0 | `vlee489/AC31009-Client` em commit imutável | Attack1/2 usados como variantes; alcance físico continua configurado no `FighterDefinition`; escala/anchor calibrados. |
 | Aldric | Martial Hero 2 | LuizMelo | https://luizmelo.itch.io/martial-hero-2 | CC0 1.0 | `RudraO2/tokenbrawl` em commit imutável | Clips mapeados para o state machine existente; ataques alternativos associados às variantes corporais; escala/anchor calibrados. |
+| Marcelo | Marcelo Fighter | MarceloMatheus | Pacote de integração fornecido pelo autor | Fornecido para uso neste projeto | `public/assets/fighters/marcelo/` | 12 PNGs locais; retrato dedicado; idle/walk/jump/fall/block/hit/KO/vitória; `heavyA/heavyB` compartilham a única folha pesada; escala 0.25 e âncora nos pés calibradas. |
 
 ### Evidências de licença
 
@@ -31,7 +32,7 @@ npm run assets:vendor
 
 O script `scripts/vendor-assets.mjs` baixa apenas os sprite sheets usados pelo roster e verifica a assinatura PNG antes de escrever. Depois, `npm run build` copia `public/` para `dist/`.
 
-**Estado desta entrega:** a infraestrutura local-first está implementada, mas o ambiente de geração não possui resolução DNS para `raw.githubusercontent.com`, portanto o comando de vendorização não pôde completar aqui. Isso não impede o jogo de iniciar: ele tenta os mirrors no navegador e mantém placeholders de carregamento elegantes nas áreas dependentes de sprite. Para uma publicação comercial offline, execute o comando em uma máquina conectada e inclua os PNGs resultantes no repositório/pacote.
+O pacote **Marcelo Fighter** já está integralmente vendorizado e funciona offline. Os demais packs mantêm o fallback remoto e os placeholders de carregamento quando seus arquivos locais não estiverem disponíveis.
 
 ## Assets originais do projeto
 
