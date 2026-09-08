@@ -88,14 +88,16 @@ b.send({ type: 'joinRoom', code });
 await a.nextWhere(m => m.type === 'roomState' && m.room.players.length === 2, 'two-player room');
 await b.nextWhere(m => m.type === 'roomState' && m.room.players.length === 2, 'joined room');
 a.send({ type: 'selectFighter', fighterId: 'mateo' });
-b.send({ type: 'selectFighter', fighterId: 'darius' });
+b.send({ type: 'selectFighter', fighterId: 'marcelo' });
 a.send({ type: 'selectSkin', skinId: 'aurora' });
-b.send({ type: 'selectSkin', skinId: 'cobalt' });
+b.send({ type: 'selectSkin', skinId: 'polar' });
 a.send({ type: 'ready', ready: true });
 b.send({ type: 'ready', ready: true });
 const [ma, mb] = await Promise.all([a.next('matchStart'), b.next('matchStart')]);
-assert.deepEqual(ma.match.skinIds,['aurora','cobalt']);
-assert.deepEqual(mb.match.skinIds,['aurora','cobalt']);
+assert.deepEqual(ma.match.fighterIds,['mateo','marcelo']);
+assert.deepEqual(mb.match.fighterIds,['mateo','marcelo']);
+assert.deepEqual(ma.match.skinIds,['aurora','polar']);
+assert.deepEqual(mb.match.skinIds,['aurora','polar']);
 if (ma.match.matchId !== mb.match.matchId) throw new Error('Match mismatch');
 
 // Disconnect active host. Remaining player becomes host, but match is held for reconnect grace.

@@ -149,12 +149,12 @@ assert.equal(globalThis.window.__FINAL_BELL_DEBUG__?.settings?.roundsToWin,3,'fi
 
 console.log('Gameplay smoke tests passed: simultaneous input, jump/bounds, attacks, block, hit stun/stop, knockback, cancel, pushboxes, combos, configurable rounds, selected stage, pause/restart.');
 
-// V3 roster quality gate: four distinct data-driven fighters and unique visual packs.
+// V3 roster quality gate: five distinct data-driven fighters and unique visual packs.
 const { ROSTER } = await import('../dist/src/characters/roster.js');
 const { combatBalance } = await import('../dist/src/config/combatBalance.js');
-assert.equal(ROSTER.length,4,'v3 must expose exactly four launch fighters after pruning bugged roster entries');
-assert.equal(new Set(ROSTER.map(f=>f.id)).size,4,'fighter ids must be unique');
-assert.equal(new Set(ROSTER.map(f=>f.sprite?.packName)).size,4,'launch roster should use four distinct sprite packs');
+assert.equal(ROSTER.length,5,'v3 must expose all five configured fighters');
+assert.equal(new Set(ROSTER.map(f=>f.id)).size,5,'fighter ids must be unique');
+assert.equal(new Set(ROSTER.map(f=>f.sprite?.packName)).size,5,'roster should use five distinct sprite packs');
 for(const f of ROSTER){
   assert.ok(f.sprite,'every launch fighter should have a professional sprite profile');
   assert.ok(f.maxHealth>=80&&f.maxHealth<=130,'health must stay inside sane launch balance bounds');
@@ -162,6 +162,11 @@ for(const f of ROSTER){
   assert.equal(f.skins.length,3,`${f.id} should expose three selectable skins`);
   assert.deepEqual(Object.keys(f.specials).sort(),['special1','special2','super'],`${f.id} should expose a complete special kit`);
 }
+const marcelo=ROSTER.find(f=>f.id==='marcelo');
+assert.ok(marcelo?.sprite?.clips.portrait&&marcelo.sprite.clips.victory,'Marcelo should use the dedicated portrait and victory sheets');
+assert.equal(marcelo.sprite.scale,.25,'Marcelo sprite scale should match the normalized 1024x768 sheets');
+assert.equal(marcelo.sprite.anchorY,744,'Marcelo feet should stay anchored to the stage floor');
+const marceloVictory=new Fighter(1,marcelo,PLAYER_ONE_CONTROLS,500);marceloVictory.markVictory();assert.equal(marceloVictory.state,'victory','Marcelo should enter the victory animation state');
 
 // Normal reach is expanded by exactly 20% at runtime.
 const reachFighter=new Fighter(1,fighterA,PLAYER_ONE_CONTROLS,500),reachDummy=new Fighter(2,fighterB,PLAYER_TWO_CONTROLS,900),reachInput=new FakeInput();reachInput.press('KeyF');reachFighter.update(dt,reachInput,reachDummy.x,true);reachInput.endFrame();for(let i=0;i<5;i++)reachFighter.update(dt,reachInput,reachDummy.x,true);assert.equal(reachFighter.attackHitbox?.width,fighterA.attacks.light.hitbox.width*1.2,'normal hitbox reach should grow by 20%');
@@ -197,4 +202,4 @@ assert.ok(observed.at(-1).damage<observed[0].damage,'combo scaling should reduce
 assert.ok(observed.at(-1).stun<=combatBalance.comboEndHitStunMs,'last allowed hit should sharply reduce hit stun');
 assert.ok(observed.at(-1).kx>observed[0].kx,'pushback should grow over a combo');
 assert.equal(antiCombo.get(1),0,'max combo should force combo state to break');
-console.log('V3 roster/anti-infinite tests passed: four unique visual packs, all-vs-all core reach, deterministic limb alternation and combo escape scaling.');
+console.log('V3 roster/anti-infinite tests passed: five unique visual packs, all-vs-all core reach, deterministic limb alternation and combo escape scaling.');

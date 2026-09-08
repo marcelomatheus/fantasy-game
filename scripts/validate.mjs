@@ -13,7 +13,7 @@ const required = [
   'src/combat/CombatSystem.ts', 'src/combat/ComboSystem.ts', 'src/config/combatBalance.ts',
   'src/combat/ProjectileSystem.ts', 'src/systems/TouchController.ts', 'src/characters/combatKits.ts',
   'src/characters/Fighter.ts', 'src/characters/SpriteFighterRenderer.ts',
-  'src/characters/SpriteAssetManager.ts', 'src/characters/roster.ts', 'src/characters/spriteProfiles.ts',
+  'src/characters/SpriteAssetManager.ts', 'src/characters/roster.ts', 'src/characters/spriteProfiles.ts', 'src/characters/fighterMarcelo.ts',
   'src/network/protocol.ts', 'src/network/NetworkClient.ts', 'src/network/NetworkInputSource.ts',
   'server/multiplayer.mjs', 'scripts/network-smoke.mjs', 'scripts/runtime-smoke.mjs', 'scripts/vendor-assets.mjs',
   'src/stages/StageRenderer.ts', 'src/stages/stageDefinitions.ts',
@@ -40,7 +40,7 @@ for (const file of noAnyFiles) {
   if (/\bany\b/.test(source)) throw new Error(`Unexpected any in ${file}`);
 }
 const rosterSrc = fs.readFileSync(path.join(root, 'src/characters/roster.ts'), 'utf8');
-if (!rosterSrc.includes('ROSTER:FighterDefinition[]=[fighterA,fighterB,nox,aldric]')) throw new Error('Launch roster is incomplete');
+if (!rosterSrc.includes('ROSTER:FighterDefinition[]=[fighterA,fighterB,nox,aldric,fighterMarcelo]')) throw new Error('Launch roster is incomplete');
 for (const term of ['Armadura firme, avanço implacável.', 'A lâmina controla a distância.']) {
   if (!rosterSrc.includes(term)) throw new Error(`Character presentation missing: ${term}`);
 }
@@ -65,11 +65,18 @@ for (const term of ['rollback', 'reconnect', 'WebSocket', 'Tournament Room', 'in
   if (!multiplayerDoc.toLowerCase().includes(term.toLowerCase())) throw new Error(`MULTIPLAYER.md missing ${term}`);
 }
 const assetsDoc = fs.readFileSync(path.join(root, 'ASSETS.md'), 'utf8');
-for (const term of ['Martial Hero', 'Martial Hero 2', 'Martial Hero 3', 'Hero Knight']) {
+for (const term of ['Martial Hero', 'Martial Hero 2', 'Martial Hero 3', 'Hero Knight', 'Marcelo Fighter']) {
   if (!assetsDoc.includes(term)) throw new Error(`ASSETS.md missing ${term}`);
 }
+const marceloSheets={idle:4,walk:6,jump:3,fall:3,block:2,'light-a':3,'light-b':3,'heavy-a':4,hit:2,ko:3,victory:4};
+for(const [name,frames] of Object.entries(marceloSheets)){
+  const file=path.join(root,'public/assets/fighters/marcelo',`${name}.png`);if(!fs.existsSync(file))throw new Error(`Missing Marcelo sheet ${name}.png`);
+  const png=fs.readFileSync(file);if(png.readUInt32BE(16)!==1024*frames||png.readUInt32BE(20)!==768)throw new Error(`Invalid Marcelo sheet geometry: ${name}.png`);
+}
+const portrait=fs.readFileSync(path.join(root,'public/assets/fighters/marcelo/portrait.png'));
+if(portrait.readUInt32BE(16)!==1024||portrait.readUInt32BE(20)!==1024)throw new Error('Invalid Marcelo portrait geometry');
 if (!fs.existsSync(path.join(root, 'dist/index.html'))) throw new Error('dist/index.html missing');
 run('scripts/smoke.mjs');
 run('scripts/runtime-smoke.mjs');
 run('scripts/network-smoke.mjs');
-console.log('Final Bell v3 validation passed: strict typecheck, build, touch controls, four complete fighter kits, skins, meter/projectiles, runtime, combat and secure multiplayer.');
+console.log('Final Bell v3 validation passed: strict typecheck, build, touch controls, five complete fighter kits, skins, meter/projectiles, runtime, combat and secure multiplayer.');
