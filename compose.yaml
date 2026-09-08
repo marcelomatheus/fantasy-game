@@ -1,0 +1,38 @@
+services:
+  game:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cielo-fantasy-fight:latest
+    init: true
+    restart: unless-stopped
+    ports:
+      - "4173:4173"
+    environment:
+      NODE_ENV: production
+      PORT: "4173"
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS:-}"
+      TRUST_PROXY: "${TRUST_PROXY:-false}"
+      HTTP_RATE_LIMIT: "${HTTP_RATE_LIMIT:-300}"
+      WS_MAX_CONNECTIONS: "${WS_MAX_CONNECTIONS:-1000}"
+      WS_MAX_CONNECTIONS_PER_IP: "${WS_MAX_CONNECTIONS_PER_IP:-20}"
+      WS_MAX_ROOMS: "${WS_MAX_ROOMS:-500}"
+      WS_MAX_SESSIONS: "${WS_MAX_SESSIONS:-5000}"
+      WS_MAX_PAYLOAD_BYTES: "${WS_MAX_PAYLOAD_BYTES:-4096}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid,nodev
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 100
+    mem_limit: 512m
+    cpus: 1.0
+    stop_grace_period: 15s
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:4173/healthz"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s

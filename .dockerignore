@@ -1,0 +1,10 @@
+.git
+.agents
+.codex
+dist
+qa
+docs
+node_modules
+npm-debug.log*
+*.md
+!README.md
