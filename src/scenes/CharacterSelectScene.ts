@@ -10,10 +10,10 @@ import type { InputManager } from '../systems/InputManager.js';
 import { button, drawBackdrop, fonts, palette, panel, pill, wrapText } from '../ui/CanvasUi.js';
 import type { Scene } from './Scene.js';
 
-const GRID_COLUMNS = 2;
-const GRID_START_X = 360;
+const GRID_COLUMNS = 3;
+const GRID_START_X = 224;
 const GRID_START_Y = 414;
-const GRID_GAP_X = 286;
+const GRID_GAP_X = 278;
 const GRID_GAP_Y = 108;
 
 export class CharacterSelectScene implements Scene {

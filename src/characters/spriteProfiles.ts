@@ -11,6 +11,7 @@ type AssetUrl={url:string;fallbackUrl:string};
 const u=(folder:string,remote:string,file:string):AssetUrl=>({url:`${LOCAL}/${folder}/${file}`,fallbackUrl:`${remote}/${file}`});
 const h=(asset:AssetUrl,frames:number,fps=10,w=200,height=200):SpriteClipDefinition=>({...asset,frameWidth:w,frameHeight:height,frames,fps});
 const v=(asset:AssetUrl,frames:number,fps=10,w=137,height=44):SpriteClipDefinition=>({...asset,frameWidth:w,frameHeight:height,frames,fps,orientation:'vertical'});
+const local=(folder:string,file:string,frames:number,fps:number,w=1024,height=768):SpriteClipDefinition=>({url:`${LOCAL}/${folder}/${file}`,frameWidth:w,frameHeight:height,frames,fps});
 
 export const martialHeroSprite:FighterSpriteDefinition={packName:'Martial Hero',author:'LuizMelo',sourceUrl:'https://luizmelo.itch.io/martial-hero',license:'CC0 1.0',anchorY:120,scale:3.65,clips:{
   idle:h(u('martial-hero',GH_MH,'idle.png'),8,9),walk:h(u('martial-hero',GH_MH,'run.png'),8,13),jump:h(u('martial-hero',GH_MH,'jump.png'),2,8),fall:h(u('martial-hero',GH_MH,'fall.png'),2,8),block:h(u('martial-hero',GH_MH,'fall.png'),2,5),
@@ -40,6 +41,12 @@ export const wizardSprite:FighterSpriteDefinition={packName:'Wizard Pack',author
 export const spiritBoxerSprite:FighterSpriteDefinition={packName:'Spirit Boxer',author:'Penusbmic',sourceUrl:'https://penusbmic.itch.io/characterpack1',license:'Free game-use pack; attribution/provenance documented in ASSETS.md',anchorY:43,scale:6.0,clips:{
   idle:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Idle.png'),4,8),walk:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Run.png'),6,12),jump:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Idle.png'),4,6),fall:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Idle.png'),4,6),block:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Idle.png'),4,5),
   lightA:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'attack%201.png'),6,16),lightB:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'attack%203.png'),10,17),heavyA:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'attack%202.png'),13,16),heavyB:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'attack%203.png'),10,14),hit:v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Damaged%20%26%20Death.png'),4,12),ko:{...v(u('spirit-boxer',`${GH_VLEE}/SpiritBoxer`,'Damaged%20%26%20Death.png'),10,8),startFrame:0}
+}};
+
+export const marceloSprite:FighterSpriteDefinition={packName:'Marcelo Fighter',author:'MarceloMatheus',sourceUrl:'marcelo-fighter-assets-ready/',license:'Asset fornecido para uso neste projeto',anchorY:744,scale:.25,clips:{
+  portrait:local('marcelo','portrait.png',1,1,1024,1024),
+  idle:local('marcelo','idle.png',4,8),walk:local('marcelo','walk.png',6,12),jump:local('marcelo','jump.png',3,10),fall:local('marcelo','fall.png',3,10),block:local('marcelo','block.png',2,8),
+  lightA:local('marcelo','light-a.png',3,15),lightB:local('marcelo','light-b.png',3,15),heavyA:local('marcelo','heavy-a.png',4,12),heavyB:local('marcelo','heavy-a.png',4,12),hit:local('marcelo','hit.png',2,10),ko:local('marcelo','ko.png',3,8),victory:local('marcelo','victory.png',4,8)
 }};
 
 export const tinted=(base:FighterSpriteDefinition,filter:string):FighterSpriteDefinition=>({...base,tintFilter:filter});

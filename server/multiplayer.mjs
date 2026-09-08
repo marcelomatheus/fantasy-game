@@ -4,8 +4,8 @@ import { SecureWsPeer, TokenBucket, isAllowedOrigin, remoteAddress, validWebSock
 const CODE_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const now=()=>Date.now();
 const cleanName=value=>String(value||'Player').replace(/[^\p{L}\p{N} _-]/gu,'').trim().slice(0,18)||'Player';
-const FIGHTERS=new Set(['mateo','darius','nox','aldric']);
-const SKINS={mateo:new Set(['default','aurora','obsidian']),darius:new Set(['default','gold','cobalt']),nox:new Set(['default','crimson','spectral']),aldric:new Set(['default','emerald','royal'])};
+const FIGHTERS=new Set(['mateo','darius','nox','aldric','marcelo']);
+const SKINS={mateo:new Set(['default','aurora','obsidian']),darius:new Set(['default','gold','cobalt']),nox:new Set(['default','crimson','spectral']),aldric:new Set(['default','emerald','royal']),marcelo:new Set(['default','neon','polar'])};
 const MESSAGE_TYPES=new Set(['hello','ping','pingReport','createRoom','joinRoom','leaveRoom','selectFighter','selectSkin','ready','startTournament','input','matchResult']);
 const cleanFighter=value=>{const fighter=String(value||'mateo').replace(/[^a-z0-9-]/gi,'').slice(0,24);return FIGHTERS.has(fighter)?fighter:'mateo';};
 const cleanSkin=(value,fighter)=>{const skin=String(value||'default').replace(/[^a-z0-9-]/gi,'').slice(0,24)||'default';return SKINS[fighter]?.has(skin)?skin:'default';};

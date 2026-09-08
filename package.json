@@ -2,7 +2,7 @@
   "name": "final-bell-fighting-game",
   "version": "3.0.0",
   "private": true,
-  "description": "Cielo Fantasy Fight: TypeScript/Canvas 2D fighting game with a curated four-fighter roster, local versus, online private rooms and single-elimination tournaments.",
+  "description": "Cielo Fantasy Fight: TypeScript/Canvas 2D fighting game with a curated five-fighter roster, local versus, online private rooms and single-elimination tournaments.",
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev.mjs",

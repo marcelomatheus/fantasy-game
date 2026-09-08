@@ -157,10 +157,10 @@ export class MainMenuScene implements Scene {
   }
 
   private renderCharactersModal(ctx: CanvasRenderingContext2D): void {
-    const columns = 2;
-    const startX = 188;
+    const columns = 3;
+    const startX = 166;
     const startY = 194;
-    const gapX = 328;
+    const gapX = 322;
     const gapY = 156;
     ROSTER.forEach((fighter, index) => {
       const col = index % columns;

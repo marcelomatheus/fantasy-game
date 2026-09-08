@@ -65,5 +65,6 @@ export class Fighter {
   takeHit(damage:number,hitStun:number,knockbackX:number,knockbackY:number):void{this.health=clamp(this.health-damage,0,this.def.maxHealth);this.hitStunMs=hitStun;this.blockStunMs=0;this.attack=null;this.buffered=null;this.vx=knockbackX;this.vy=knockbackY;if(knockbackY<0)this.grounded=false;this.flashMs=105;this.state=this.health<=0?'ko':'hit';}
   takeBlock(chip:number,blockStun:number,knockbackX:number):void{this.health=clamp(this.health-chip,0,this.def.maxHealth);this.blockStunMs=blockStun;this.vx=knockbackX;this.flashMs=60;this.state='block';}
   markFinished():void{this.state='finished';}
+  markVictory():void{this.attack=null;this.buffered=null;this.vx=0;this.vy=0;this.state='victory';}
   snapshot():FighterSnapshot{return{id:this.def.id,name:this.def.name,x:Math.round(this.x),y:Math.round(this.y),health:Number(this.health.toFixed(1)),meter:Math.round(this.meter),state:this.state,facing:this.facing,wins:this.wins};}
 }

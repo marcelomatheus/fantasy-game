@@ -3,7 +3,7 @@ export type Facing = -1 | 1;
 export type AttackKey = 'light' | 'heavy' | 'crouchLight' | 'airLight';
 export type SpecialKey = 'special1' | 'special2' | 'super';
 export type MoveKey = AttackKey | SpecialKey;
-export type FighterState = 'idle' | 'walkForward' | 'walkBackward' | 'crouch' | 'jump' | 'attack' | 'block' | 'hit' | 'ko' | 'finished';
+export type FighterState = 'idle' | 'walkForward' | 'walkBackward' | 'crouch' | 'jump' | 'attack' | 'block' | 'hit' | 'ko' | 'finished' | 'victory';
 export type StageId = 'cristo' | 'amazonia' | 'colonial' | 'sertao';
 export type RoundSeconds = 30 | 60 | 99;
 export type RoundsToWin = 1 | 2 | 3;
@@ -98,7 +98,7 @@ export interface FighterSpriteDefinition {
   anchorY: number;
   scale: number;
   tintFilter?: string;
-  clips: Partial<Record<'idle'|'walk'|'jump'|'fall'|'block'|'lightA'|'lightB'|'heavyA'|'heavyB'|'hit'|'ko'|'victory', SpriteClipDefinition>>;
+  clips: Partial<Record<'portrait'|'idle'|'walk'|'jump'|'fall'|'block'|'lightA'|'lightB'|'heavyA'|'heavyB'|'hit'|'ko'|'victory', SpriteClipDefinition>>;
 }
 
 export interface FighterDefinition {

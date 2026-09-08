@@ -6,6 +6,7 @@ export const specialKits:Record<string,Record<SpecialKey,SpecialMoveDefinition>>
   darius:{special1:move('special1','Onda de Impacto',11,175,280,235,180,10,5,{projectile:{...projectile('#d36b55',430,64,20),spawnAtMs:150}}),special2:move('special2','Uppercut Titânico',15,145,320,300,230,390,8,{}),super:move('super','Quebra-Arena',34,210,460,430,460,430,12,{})},
   nox:{special1:move('special1','Lâmina Sombria',8,95,175,185,130,15,4,{projectile:projectile('#a584dc',650,52,28)}),special2:move('special2','Ascensão Noturna',11,85,225,225,170,315,6,{}),super:move('super','Eclipse Rush',28,125,350,360,420,350,10,{})},
   aldric:{special1:move('special1','Corte de Energia',10,145,235,225,165,20,5,{projectile:projectile('#83c7b0',590,76,30)}),special2:move('special2','Guarda Celeste',13,115,275,270,205,355,7,{}),super:move('super','Julgamento Real',32,175,420,410,440,400,11,{})},
+  marcelo:{special1:move('special1','Pulso Dourado',10,105,205,210,150,18,5,{projectile:projectile('#f0a52b',620,54,26)}),special2:move('special2','Espiral Técnica',13,92,252,260,195,350,7,{}),super:move('super','Código Final',31,145,390,400,430,390,11,{})},
 };
 const skin=(id:string,name:string,filter:string,appearance:Partial<FighterAppearance>):SkinDefinition=>({id,name,filter,appearance});
 export const fighterSkins:Record<string,SkinDefinition[]>={
@@ -13,4 +14,5 @@ export const fighterSkins:Record<string,SkinDefinition[]>={
   darius:[skin('default','Original','',{}),skin('gold','Dourado','sepia(.55) saturate(1.35)',{primary:'#9d7130',accent:'#f0d08a'}),skin('cobalt','Cobalto','hue-rotate(155deg) saturate(1.2)',{primary:'#315889',accent:'#96b9df'})],
   nox:[skin('default','Original','',{}),skin('crimson','Carmesim','hue-rotate(300deg) saturate(1.45)',{primary:'#702f36',accent:'#e08b67'}),skin('spectral','Espectral','hue-rotate(92deg) saturate(.8) brightness(1.2)',{primary:'#608b7e',accent:'#bcebdc'})],
   aldric:[skin('default','Original','',{}),skin('emerald','Esmeralda','hue-rotate(58deg) saturate(1.18)',{secondary:'#315e4b',accent:'#82bd87'}),skin('royal','Real','hue-rotate(195deg) saturate(1.25)',{secondary:'#513b78',accent:'#d5b06d'})],
+  marcelo:[skin('default','Original','',{}),skin('neon','Neon','hue-rotate(72deg) saturate(1.2)',{primary:'#151b19',accent:'#64c985',impact:'#9ce6ad'}),skin('polar','Polar','grayscale(.72) brightness(1.12) contrast(1.06)',{primary:'#d7d9dc',secondary:'#333941',accent:'#e0b56c'})],
 };

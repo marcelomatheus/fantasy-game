@@ -55,7 +55,7 @@ export class SpriteFighterRenderer {
   }
 
   renderPortrait(ctx: CanvasRenderingContext2D, def: Fighter['def'], x: number, y: number, w: number, h: number, now: number): void {
-    const clip = def.sprite?.clips.idle;
+    const clip = def.sprite?.clips.portrait ?? def.sprite?.clips.idle;
     const sprite = def.sprite;
     if (!clip || !sprite) {
       this.portraitFallback(ctx, def, x, y, w, h);
@@ -171,6 +171,7 @@ export class SpriteFighterRenderer {
   private pickClip(f: Fighter): SpriteClipDefinition | undefined {
     const s = f.def.sprite?.clips;
     if (!s) return undefined;
+    if (f.state === 'victory') return s.victory ?? s.idle;
     if (f.state === 'ko' || f.state === 'finished') return s.ko ?? s.hit ?? s.idle;
     if (f.state === 'hit') return s.hit ?? s.idle;
     if (f.state === 'block') return s.block ?? s.idle;
