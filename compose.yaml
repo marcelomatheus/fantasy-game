@@ -8,6 +8,13 @@ services:
     restart: unless-stopped
     ports:
       - "4173:4173"
+    networks:
+      - celo-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fantasy.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.services.fantasy.loadbalancer.server.port=4173"
+      - "traefik.docker.network=celo-network"
     environment:
       NODE_ENV: production
       PORT: "4173"
@@ -36,3 +43,7 @@ services:
       timeout: 3s
       retries: 3
       start_period: 10s
+
+networks:
+  celo-network:
+    external: true
