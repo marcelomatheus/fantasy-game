@@ -1,0 +1,29 @@
+{
+  "name": "final-bell-fighting-game",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Cielo Fantasy Fight: TypeScript/Canvas 2D fighting game with a curated four-fighter roster, local versus, online private rooms and single-elimination tournaments.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "typecheck": "node vendor/typescript/lib/tsc.js --noEmit",
+    "test": "node scripts/build.mjs && node scripts/smoke.mjs && node scripts/network-smoke.mjs && node scripts/security-smoke.mjs",
+    "network:test": "node scripts/network-smoke.mjs",
+    "security:test": "node scripts/security-smoke.mjs",
+    "validate": "node scripts/validate.mjs",
+    "assets:vendor": "node scripts/vendor-assets.mjs",
+    "runtime:test": "node scripts/build.mjs && node scripts/runtime-smoke.mjs"
+  },
+  "keywords": [
+    "fighting-game",
+    "typescript",
+    "canvas",
+    "multiplayer",
+    "websocket",
+    "tournament",
+    "indie-game"
+  ],
+  "license": "MIT"
+}
