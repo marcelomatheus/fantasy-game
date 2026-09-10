@@ -1,8 +1,6 @@
-# Final Bell — Fighting Game v3
+# Cielo Fantasy Fight
 
 **Final Bell v3** evolui a vertical slice anterior sem substituir o núcleo que tornou o combate responsivo. A mesma simulação de `Fighter` + `CombatSystem` + `RoundManager` continua responsável por movimento, commitment windows, hitboxes/hurtboxes, hit stop, hit stun, knockback, block, combos, câmera e rounds; a v3 profissionaliza as camadas ao redor dela.
-
-![Gameplay](docs/screenshot-fight.png)
 
 ## O que entrou na v3
 
