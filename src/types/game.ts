@@ -146,6 +146,22 @@ export interface FighterSnapshot {
   wins: number;
 }
 
+export interface FighterSimulationState {
+  x:number;y:number;vx:number;vy:number;health:number;displayedHealth:number;state:FighterState;facing:Facing;wins:number;meter:number;
+  hitStunMs:number;blockStunMs:number;flashMs:number;grounded:boolean;attackSerial:number;strikeVariant:0|1;previousAttack:MoveKey|null;
+  commandClock:number;directions:{direction:number;at:number}[];finisherRequest:boolean;
+  attack:{key:MoveKey;elapsed:number;hitTargets:PlayerId[];serial:number}|null;
+  buffered:{key:MoveKey;remaining:number}|null;
+}
+
+export interface ProjectileSimulationState { owner:PlayerId;x:number;y:number;vx:number;life:number;special:SpecialKey;facing:Facing; }
+export interface ComboSimulationState { 1:{count:number;lastHitAt:number|null};2:{count:number;lastHitAt:number|null}; }
+export interface RoundSimulationState { round:number;timer:number;phase:'roundIntro'|'fightIntro'|'fighting'|'ko'|'roundOver'|'finishWindow'|'finisher'|'matchOver';phaseMs:number;matchWinner:PlayerId|null; }
+export interface MatchSimulationSnapshot {
+  frame:number;now:number;fighters:[FighterSimulationState,FighterSimulationState];projectiles:ProjectileSimulationState[];
+  projectileSeen:{1:number;2:number};combos:ComboSimulationState;round:RoundSimulationState;hitStopMs:number;
+}
+
 export interface AppSettings {
   masterVolume: number;
   musicVolume: number;
@@ -171,4 +187,5 @@ export interface DebugSnapshot {
   skinIds?: [string,string];
   roomCode?: string;
   onlineStatus?: string;
+  netcode?: {lateInputs:number;predictionMisses:number;ping:number;jitter:number;bufferedAmount:number;droppedInputs:number};
 }

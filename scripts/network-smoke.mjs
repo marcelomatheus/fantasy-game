@@ -31,7 +31,7 @@ class Client {
         }
       }
     };
-    this.send({ type: 'hello', sessionId: this.session, name: this.name, resumeToken: this.resumeToken || undefined });
+    this.send({ type: 'hello', protocolVersion: 2, sessionId: this.session, name: this.name, resumeToken: this.resumeToken || undefined });
     return this.next('welcome');
   }
 
@@ -63,7 +63,7 @@ class Client {
 }
 
 const server = http.createServer((request, response) => response.end('ok'));
-attachMultiplayer(server, { disconnectTimeoutMs: 220, sweepIntervalMs: 40 });
+attachMultiplayer(server, { disconnectTimeoutMs: 220, sweepIntervalMs: 40, allowResultReports: true });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const address = server.address();
 if (!address || typeof address === 'string') throw new Error('No server address');
@@ -99,6 +99,8 @@ assert.deepEqual(mb.match.fighterIds,['mateo','marcelo']);
 assert.deepEqual(ma.match.skinIds,['aurora','polar']);
 assert.deepEqual(mb.match.skinIds,['aurora','polar']);
 if (ma.match.matchId !== mb.match.matchId) throw new Error('Match mismatch');
+assert.equal(ma.match.netcode.protocolVersion,2);
+assert.equal(ma.match.netcode.tickRate,60);
 
 // Disconnect active host. Remaining player becomes host, but match is held for reconnect grace.
 a.close();
@@ -118,6 +120,10 @@ if (!restored?.connected || restored.status !== 'IN MATCH') throw new Error('Rec
 a.send({ type: 'input', matchId: ma.match.matchId, frame: 10, bits: 37 });
 const remote = await b.nextWhere(m => m.type === 'remoteInput' && m.matchId === ma.match.matchId, 'remote input');
 if (remote.bits !== 37 || remote.frame !== 10) throw new Error('Input relay failed');
+for(let frame=1;frame<=12;frame++){if(frame!==10)a.send({type:'input',matchId:ma.match.matchId,frame,bits:frame%2});b.send({type:'input',matchId:ma.match.matchId,frame,bits:0});}
+const authority=await b.nextWhere(m=>m.type==='stateSnapshot'&&m.matchId===ma.match.matchId&&m.confirmedFrame>=10,'authoritative state',3500);
+assert.equal(typeof authority.checksum,'string');
+assert.equal(authority.state.frame,authority.frame);
 
 // Disconnect again and let the configured grace period expire: Beta wins by forfeit.
 a.close();

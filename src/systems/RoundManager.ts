@@ -1,4 +1,4 @@
-import type { MatchSettings, PlayerId } from '../types/game.js';
+import type { MatchSettings, PlayerId,RoundSimulationState } from '../types/game.js';
 import type { Fighter } from '../characters/Fighter.js';
 
 type Phase='roundIntro'|'fightIntro'|'fighting'|'ko'|'roundOver'|'finishWindow'|'finisher'|'matchOver';
@@ -52,4 +52,6 @@ export class RoundManager {
     if(p1.health===p2.health)return;
     if(p1.health>p2.health)p1.wins++;else p2.wins++;
   }
+  simulationState():RoundSimulationState{return{round:this.round,timer:this.timer,phase:this.phase,phaseMs:this.phaseMs,matchWinner:this.matchWinner};}
+  restoreSimulationState(state:RoundSimulationState):void{this.round=state.round;this.timer=state.timer;this.phase=state.phase;this.phaseMs=state.phaseMs;this.matchWinner=state.matchWinner;}
 }

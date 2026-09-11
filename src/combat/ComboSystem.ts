@@ -1,5 +1,5 @@
 import { COMBO_WINDOW_MS } from '../config/gameConfig.js';
-import type { PlayerId } from '../types/game.js';
+import type { ComboSimulationState,PlayerId } from '../types/game.js';
 
 interface ComboState { count: number; lastHitAt: number; }
 export class ComboSystem {
@@ -10,4 +10,6 @@ export class ComboSystem {
   update(now:number):void{for(const id of [1,2] as PlayerId[]){const c=this.combos[id];if(now-c.lastHitAt>COMBO_WINDOW_MS)c.count=0;}}
   break(player:PlayerId):void{this.combos[player]={count:0,lastHitAt:-Infinity};}
   reset():void{this.combos={1:{count:0,lastHitAt:-Infinity},2:{count:0,lastHitAt:-Infinity}};}
+  simulationState():ComboSimulationState{return{1:{count:this.combos[1].count,lastHitAt:Number.isFinite(this.combos[1].lastHitAt)?this.combos[1].lastHitAt:null},2:{count:this.combos[2].count,lastHitAt:Number.isFinite(this.combos[2].lastHitAt)?this.combos[2].lastHitAt:null}};}
+  restoreSimulationState(state:ComboSimulationState):void{this.combos={1:{count:state[1].count,lastHitAt:state[1].lastHitAt??-Infinity},2:{count:state[2].count,lastHitAt:state[2].lastHitAt??-Infinity}};}
 }
