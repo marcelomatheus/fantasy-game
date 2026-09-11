@@ -9,9 +9,10 @@
     "start": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
     "typecheck": "node vendor/typescript/lib/tsc.js --noEmit",
-    "test": "node scripts/build.mjs && node scripts/smoke.mjs && node scripts/network-smoke.mjs && node scripts/security-smoke.mjs",
-    "network:test": "node scripts/network-smoke.mjs",
-    "security:test": "node scripts/security-smoke.mjs",
+    "test": "node scripts/build.mjs && node scripts/smoke.mjs && node scripts/netcode-smoke.mjs && node scripts/network-smoke.mjs && node scripts/security-smoke.mjs",
+    "network:test": "node scripts/build.mjs && node scripts/network-smoke.mjs",
+    "netcode:test": "node scripts/build.mjs && node scripts/netcode-smoke.mjs",
+    "security:test": "node scripts/build.mjs && node scripts/security-smoke.mjs",
     "validate": "node scripts/validate.mjs",
     "assets:vendor": "node scripts/vendor-assets.mjs",
     "runtime:test": "node scripts/build.mjs && node scripts/runtime-smoke.mjs"
